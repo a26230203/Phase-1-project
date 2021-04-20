@@ -87,21 +87,23 @@ function getFood(food) {
             foodReviewForm.append(submitReviewBtn)
 
               //Post customer food review 
-            /*  foodReviewForm.addEventListener("submit", e => {
+             foodReviewForm.addEventListener("submit", e => {
                   e.preventDefault()
-                  let arrOfReview = food.review
+                  console.log(food.review)
                   let newReview = e.target.foodReview.value
-               fetch(`http://localhost:3000/Foods/${food.id}`, {
-                        method: "POST",
+                  let arrOfReview = [...food.review, newReview]
+                  console.log(arrOfReview)
+               fetch(`http://localhost:3000/foods/${food.id}`, {
+                        method: "PATCH",
                         headers: {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
-                            review: arrOfReview.push(newReview)
+                            review: arrOfReview
                         })
                 })
                 .then(res => res.json())
-              })*/
+              })
         })
 
             //Like button evenListener
@@ -258,5 +260,4 @@ function overallReview(review) {
             editorSub.style.display = 'none'
         }
     })
-
 }
