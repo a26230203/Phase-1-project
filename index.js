@@ -11,7 +11,7 @@ fetch('http://localhost:3000/Foods')
 })
 
 //help function to create list of food
-let shows = 0;
+let shows = false;
 
 function getFood(food) {
     
@@ -28,23 +28,81 @@ function getFood(food) {
 
     let foodUl = document.createElement('ul')
 
+    
+    
+    
     foodLi.append(title, img)
     menu.append(foodLi)
     
     img.addEventListener('click', e => {
+        shows = !shows;
+        if (shows) {
             console.log(shows);
             let descr = document.createElement('p')
             descr.className = "description"
             descr.innerText = food.description
-    
-            let price = document.createElement('li')
+            
+            let price = document.createElement('p')
             price.className = "price"
             price.innerText = `Price: $${food.price}`
-    
-            foodUl.append(descr, price)
-            foodLi.append(foodUl)
+            
+            let foodReviewBtn = document.createElement('button')
+            foodReviewBtn.className = "foodReviewBtn"
+            foodReviewBtn.innerText = "Review"
+            foodReviewBtn.addEventListener('click', e => {
+                e.preventDefault()
 
-            foodUl.style.display = "block"
+                let foodReviewForm = document.createElement('form')
+                foodReviewForm.className = "foodReviewForm"
+
+                let formInput = document.createElement('input')
+                formInput.type = 'text'
+                formInput.name = 'foodReview'
+                formInput.placeholder = 'Type your review here'
+                foodReviewForm.append(formInput)
+                foodUl.append(foodReviewForm)
+                
+                let submitReviewBtn = document.createElement('input')
+                submitReviewBtn.type = "submit"
+                submitReviewBtn.className = "submitReviewButton"
+                foodReviewForm.append(submitReviewBtn)
+
+                foodReviewForm.addEventListener('submit', (e) => {
+                    e.preventDefault()
+                    let newReview = e.target.foodReview.value
+                    fetch(`http://localhost:3000/Foods/${Foods.id}`, {
+                        method: "POST",
+                        headers: {
+                        "Content-Type": "application/json"
+                    },
+                        body: JSON.stringify({newReview})
+                            
+                        .then((r) => r.json())
+                        .then(foodObj => {
+                            console.log(foodObj.review)
+
+                        })
+                    })
+               // fetch(`http://localhost:3000/Foods/${food.id}`, {
+              //      method: "POST",
+               //     headers: {
+                //        "Content-Type": "application/json"
+                 //   },
+                  //  body: JSON.stringify(reviews.push())
+               // })
+                })
+
+            let likeBtn = document.createElement('button')
+            likeBtn.className = "likeBtn"
+            likeBtn.innerText = "Like"
+            
+            foodUl.append(descr, price, likeBtn, foodReviewBtn)
+            foodLi.append(foodUl)
+            
+            foodUl.style.display = "block";
+        } else {
+            foodUl.innerText = ''
+            foodUl.style.display = "none";
         }
-    )
-}
+    )}
+    })}
