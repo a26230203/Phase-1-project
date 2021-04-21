@@ -45,7 +45,7 @@ function getFood(food) {
 
     let foodUl = document.createElement('ul')
     
-    foodLi.append(title, img)
+    foodLi.append(img, title)
     menu.append(foodLi)
         
     img.addEventListener('click', e => { 
@@ -65,7 +65,7 @@ function getFood(food) {
 
         let likes =document.createElement('p')
         likes.className = "Like"
-        likes.innerText = `${food.likes} People Like this item`
+        likes.innerText = `${food.likes} People Like this item!`
 
         let likeBtn = document.createElement('button')
         likeBtn.className = "likeBtn"
@@ -79,7 +79,7 @@ function getFood(food) {
         let foodReviewForm = document.createElement('form')
         foodReviewForm.className = "foodReviewForm"       
 
-        let formInput = document.createElement('input')
+        let formInput = document.createElement('textarea')
         formInput.type = 'text'
         formInput.name = 'foodReview'
         formInput.placeholder = 'Type your review here'
@@ -157,7 +157,7 @@ function getFood(food) {
                 editForms.addEventListener("submit", e => {
                     e.preventDefault()
                     let newInput = e.target.input.value
-                    let arrOfFoodReview = [...food.review, newInput]
+                    let arrOfFoodReview = [...food.review, newInput].slice(-1)
                     fetch(`http://localhost:3000/foods/${food.id}`, {
                         method: "PATCH",
                         headers: {
