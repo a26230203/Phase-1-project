@@ -13,11 +13,12 @@ let contactShows = false;
 let contactCounter = 0;
 let homeMenusCounter = 0;
 let contactHeader = document.querySelector('li#contact')
+let contactInfoDiv = document.querySelector('section.contactInfo')
 
 restaurantReview.style.display = "none"
 customerReview.style.display = "none"
 
-//hello
+
 homeMenus.addEventListener('click', e => {
     homeMenusShows = !homeMenusShows
     
@@ -406,33 +407,6 @@ function getFood(food) {
                 menu.innerText = ""
                 customerReview.innerText = ""
     }
-})
-let contactInfoDiv = document.querySelector('section.contactInfo')
-console.log(contactInfoDiv)
-
-contactHeader.addEventListener('click', e => {
-    
-    console.log(contactUl)
-    
-    let contactUl = document.createElement('ul')
-    contactUl.className = 'contactUl'
-    let contactAddress = document.createElement('p')
-    contactAddress.className = 'address'
-    contactAddress.innerText = '60 W 23rd St'
-    let contactPhone = document.createElement('p')
-    contactPhone.className = 'phone'
-    contactPhone.innerText = '(212) 989-3122'
-    let contactEmail = document.createElement('p')
-    contactEmail.className = 'email'
-    contactEmail.innerText = 'customerfeedback@outbacksteakhouse.com'
-
-    contactUl.append(contactAddress, contactPhone, contactEmail)
-    contactInfoDiv.append(contactUl)
-
-
-
-
-
 })
 
 
