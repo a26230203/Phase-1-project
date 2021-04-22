@@ -419,13 +419,13 @@ contactHeader.addEventListener('click', e => {
         contactCounter++
         let contactAdd = document.createElement('p')
         contactAdd.className = "contactAdd"
-        contactAdd.innerText = "60 W 23rd St"
+        contactAdd.innerText = "Address: 60 W 23rd St"
         let contactPh = document.createElement('p')
         contactPh.className = "contactPh"
-        contactPh.innerText = "(212) 989-3122"
+        contactPh.innerText = "Phone: (212) 989-3122"
         let contactEm = document.createElement('p')
         contactEm.className = "contactEm"
-        contactEm.innerText = "customerfeedback@outbacksteakhouse.com"
+        contactEm.innerText = "Email: customerfeedback@outbacksteakhouse.com"
     
         contactUl.append(contactAdd, contactPh, contactEm)
         contactInfoDiv.append(contactUl)
@@ -437,6 +437,13 @@ contactHeader.addEventListener('click', e => {
         contactUl.innerText = " "
     }
 })
+
+let homeButton = document.querySelector('li#home')
+
+function reload() {
+    reload = location.reload()};
+
+    homeButton.addEventListener("click", reload, false);
 
 
 
