@@ -79,7 +79,7 @@ function getFood(food) {
         let foodReviewForm = document.createElement('form')
         foodReviewForm.className = "foodReviewForm"       
 
-        let formInput = document.createElement('textarea')
+        let formInput = document.createElement('input')
         formInput.type = 'text'
         formInput.name = 'foodReview'
         formInput.placeholder = 'Type your review here'
@@ -152,12 +152,10 @@ function getFood(food) {
             if(foodReviewShows) {
                 editForms.append(editInputs, editorSubs)
                 foodReviewUls.append(editForms)
-
-
                 editForms.addEventListener("submit", e => {
                     e.preventDefault()
                     let newInput = e.target.input.value
-                    let arrOfFoodReview = [...food.review, newInput].slice(-1)
+                    let arrOfFoodReview = [...food.review, newInput]
                     fetch(`http://localhost:3000/foods/${food.id}`, {
                         method: "PATCH",
                         headers: {
@@ -174,9 +172,7 @@ function getFood(food) {
                 })
                     editInputs.style.display = 'block'
                     editorSubs.style.display = 'block'
-                        
                 }else {
-
                     editInputs.style.display = 'none'
                     editorSubs.style.display = 'none'
                 }
