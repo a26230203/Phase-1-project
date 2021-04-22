@@ -9,7 +9,11 @@ let counter = 0;
 let reviewShows = false;
 let foodReviewShows = false;
 let homeMenusShows = false;
+let contactShows = false;
+let contactCounter = 0;
 let homeMenusCounter = 0;
+let contactHeader = document.querySelector('li#contact')
+let contactInfoDiv = document.querySelector('section.contactInfo')
 
 restaurantReview.style.display = "none"
 customerReview.style.display = "none"
@@ -45,7 +49,7 @@ function getFood(food) {
 
     let foodUl = document.createElement('ul')
     
-    foodLi.append(title, img)
+    foodLi.append(img, title)
     menu.append(foodLi)
         
     img.addEventListener('click', e => { 
@@ -65,7 +69,7 @@ function getFood(food) {
 
         let likes =document.createElement('p')
         likes.className = "Like"
-        likes.innerText = `${food.likes} People Like this item`
+        likes.innerText = `${food.likes} People Like this item!`
 
         let likeBtn = document.createElement('button')
         likeBtn.className = "likeBtn"
@@ -130,50 +134,53 @@ function getFood(food) {
                 foodUl.append(foodReviewUls)
 
         delBtns.addEventListener('click', e =>{
-           /* let atrrOfReviews = food.review.slice(1, -1)
-
+            food.review.splice(index, 1)
             fetch(`http://localhost:3000/foods/${food.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    review: atrrOfReviews
-                })
-            })  
+                    review: food.review
+                }),
+            }) 
             .then(res => res.json())
-            .then(delte => {
-           })*/
-             foodReviewUls.remove()
+            .then(deleted => {
+                foodReviewUls.remove()
+            }) 
         })
                     
         editors.addEventListener('click', e => {
+            console.log(food.review[index])
             foodReviewShows = !foodReviewShows
             if(foodReviewShows) {
                 editForms.append(editInputs, editorSubs)
                 foodReviewUls.append(editForms)
+
                 editForms.addEventListener("submit", e => {
+                
                     e.preventDefault()
+                    console.log(reviewArr)
                     let newInput = e.target.input.value
+                    food.review[index] = newInput
+
                     fetch(`http://localhost:3000/foods/${food.id}`, {
                         method: "PATCH",
                         headers: {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
-                            review: arrOfFoodReview
+                            review: food.review
                         }),
                     })
-                    .then(res => res.json())
+                    .then(res => res.json())                                                                                                                                                                                                                                   
                     .then(updatedReview => {
                         newPs.innerText = updatedReview.review.slice(-1)
                     })
                 })
                     editInputs.style.display = 'block'
                     editorSubs.style.display = 'block'
-                        
-                }else {
-
+                }else {                                                 
                     editInputs.style.display = 'none'
                     editorSubs.style.display = 'none'
                 }
@@ -221,9 +228,9 @@ function getFood(food) {
                     
                     foodReviewUls.append(newPs, editors, delBtns) 
                     foodUl.append(foodReviewUls)
+                    
                 })
             })
-
                     foodReviewUl.style.display = "block"
                      formInput.style.display = 'block'
                     submitReviewBtn.style.display = 'block'
@@ -233,7 +240,7 @@ function getFood(food) {
                         foodReviewUl.style.display = "none"
                      }    
          })
-                //Like button evenListener
+    //Like button evenListener
     likeBtn.addEventListener('click', e => {
         
         if(counter == 0 && likeBtn.innerText == "Like") {
@@ -401,6 +408,37 @@ function getFood(food) {
                 customerReview.innerText = ""
     }
 })
+
+
+let contactUl = document.createElement('ul')
+contactUl.className = "contactUl"
+
+contactHeader.addEventListener('click', e => {  
+    contactShows = !contactShows
+    if(contactShows && contactCounter == 0) {
+        contactCounter++
+        let contactAdd = document.createElement('p')
+        contactAdd.className = "contactAdd"
+        contactAdd.innerText = "60 W 23rd St"
+        let contactPh = document.createElement('p')
+        contactPh.className = "contactPh"
+        contactPh.innerText = "(212) 989-3122"
+        let contactEm = document.createElement('p')
+        contactEm.className = "contactEm"
+        contactEm.innerText = "customerfeedback@outbacksteakhouse.com"
+    
+        contactUl.append(contactAdd, contactPh, contactEm)
+        contactInfoDiv.append(contactUl)
+
+        contactUl.style.display = "block"
+    }else {
+        contactUl.style.display = "none"
+        contactCounter--
+        contactUl.innerText = " "
+    }
+})
+
+
 
 
 

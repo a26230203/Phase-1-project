@@ -1,24 +1,161 @@
-.logo {
+h1.logo {
+    display: none;
+    font-family: fantasy;
+    text-align: center;
+    -webkit-text-stroke: 0.001px black;
+}
+
+div.logo {
+    display: block;
+    text-align: center;
+}
+
+img#logoImg {
+    display: inline-block;
+    max-width: 50%;
+    height: auto;
+    padding-bottom: 50px;
+}
+
+span#first {
     color: crimson;
     font-size: 50px;
     font-weight: 600;
 }
 
-.logo span {
+span#second {
     color: black;
+    font-size: 50px;
+    font-weight: 600;
 }
 
-.navBar {
-    display: flex;
+
+
+body {
+    
+    align-content: center;
+    background-attachment: scroll;
+    background-position: center;
+    background-color: gray;
+    background-repeat: repeat-y;
+    opacity: 1;
+    
+}
+
+body::before {
+    z-index: -1;
+    content: '';
+    background-image: url('https://assets.simpleviewinc.com/simpleview/image/fetch/c_fill,g_auto,h_750,q_50,w_1920/https://assets.simpleviewinc.com/simpleview/image/upload/crm/seattlesouthside/Outback_Steakhouse-13_01ea09bd-f5e5-3be1-4f5bfb54f1427a47.jpg');
+    background-size: cover;
+    background-repeat: repeat-y;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: .50;
+    background-size: 100% 100%;
+}
+
+section.navBar {
+    display: inline-block;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
     list-style: none;
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 20px;
 }
 
 .navBar li {
+    font-family: fantasy;
     display: inline-block;
-    font-weight: 500;
-    padding: 0px 5px;
-    margin-left: 200px;
+    font-weight: bolder;
+    padding: 0px 15px;
+    cursor: pointer;
+    -webkit-text-stroke: 1px black;
+    
     text-transform: uppercase;
     color: black;
     font-size: 20px;
+}
+
+.navBar li:hover {
+    color:blanchedalmond
+}
+
+section.menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+ul.foodList {
+    font-family: fantasy;
+    text-align: center;
+    padding-left: 0%;
+}
+
+ul {
+    padding-left: 0%;
+}
+
+form.foodReviewForm {
+    display: block;
+    text-align: center;
+}
+
+form.foodReviewForm input {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+form.editForm {
+    display: block;
+    text-align: center;
+}
+
+input#input.editInput {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+form.editForm button {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+
+button {
+    font-family: fantasy;
+}
+
+input {
+    font-family: fantasy;
+}
+
+section.customerreview {
+    font-family: fantasy;
+    text-align: center;
+}
+
+form.restaurant-review {
+    display: block;
+    text-align: center;
+}
+
+input#restaurantReview {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
