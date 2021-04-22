@@ -113,7 +113,7 @@ function getFood(food) {
                 newPs.className = "reviewP"
                 newPs.innerText = reviewArr
     
-            let delBtns = document.createElement('button')
+          /*  let delBtns = document.createElement('button')
                 delBtns.className = "delete"
                 delBtns.innerText = "Delete"
     
@@ -128,12 +128,13 @@ function getFood(food) {
                 editInputs.className = "editInput"
                 editInputs.id = "input"
             let editorSubs = document.createElement('button')
-                editorSubs.innerText = "Update"
+                editorSubs.innerText = "Update" */
                 
-                foodReviewUls.append(newPs, editors, delBtns) 
-                foodUl.append(foodReviewUls)
+                foodReviewUls.append(newPs/*, editors, delBtns*/)
+                foodReviewUl.append(foodReviewUls)
+                foodUl.append(foodReviewUl)
 
-        delBtns.addEventListener('click', e =>{
+      /*  delBtns.addEventListener('click', e =>{
             food.review.splice(index, 1)
             fetch(`http://localhost:3000/foods/${food.id}`, {
                 method: "PATCH",
@@ -184,14 +185,14 @@ function getFood(food) {
                     editInputs.style.display = 'none'
                     editorSubs.style.display = 'none'
                 }
-            })
+            }) */
         })
         
     //Post customer food review 
     foodReviewForm.addEventListener("submit", e => {
         e.preventDefault()
         let newReview = e.target.foodReview.value
-        let arrOfReview = [...food.review, newReview]
+         food.review = [...food.review, newReview]
 
         fetch(`http://localhost:3000/foods/${food.id}`, {
             method: "PATCH",
@@ -199,7 +200,7 @@ function getFood(food) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                review: arrOfReview
+                review: food.review 
             })
         })
         .then(res => res.json())
@@ -226,8 +227,61 @@ function getFood(food) {
                 let editorSubs = document.createElement('button')
                     editorSubs.innerText = "Update"
                     
-                    foodReviewUls.append(newPs, editors, delBtns) 
-                    foodUl.append(foodReviewUls)
+                    foodReviewUls.append(newPs, editors, delBtns)
+                    foodReviewUl.append(foodReviewUls)
+                    foodUl.append(foodReviewUl)
+
+
+        delBtns.addEventListener('click', e =>{
+            food.review.pop()
+            fetch(`http://localhost:3000/foods/${food.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    review: food.review
+                }),
+            }) 
+            .then(res => res.json())
+            .then(deleted => {
+                foodReviewUls.remove()
+            }) 
+        })
+                    
+        editors.addEventListener('click', e => {
+            foodReviewShows = !foodReviewShows
+            if(foodReviewShows) {
+                editForms.append(editInputs, editorSubs)
+                foodReviewUls.append(editForms)
+
+                editForms.addEventListener("submit", e => {
+                    e.preventDefault()
+                    let newInput = e.target.input.value
+                    food.review.splice(-1, 1, newInput)
+
+                    fetch(`http://localhost:3000/foods/${food.id}`, {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            review: food.review
+                        }),
+                    })
+                    .then(res => res.json())                                                                                                                                                                                                                                   
+                    .then(updatedReview => {
+                        newPs.innerText = updatedReview.review.slice(-1)
+                    })
+                })
+                    editInputs.style.display = 'block'
+                    editorSubs.style.display = 'block'
+                }else {                                                 
+                    editInputs.style.display = 'none'
+                    editorSubs.style.display = 'none'
+                }
+            })                    
+
                     
                 })
             })
@@ -293,7 +347,13 @@ function getFood(food) {
     .then(res => res.json())
     .then(reviewObj => {
         reviewObj.forEach(review => {
-            overallReview(review)
+           // overallReview(review)
+           let newP = document.createElement('p')
+        newP.className = "reviewP"
+        newP.innerText = review.review
+        let reviewList = document.createElement('ul')
+        reviewList.append(newP)
+        customerReview.append(reviewList)
         })
     })
     
@@ -441,11 +501,11 @@ contactHeader.addEventListener('click', e => {
 let homeButton = document.querySelector('li#home')
 
 function reload() {
-    reload = location.reload()};
+    reload = location.reload();
+}
 
-    homeButton.addEventListener("click", reload, false);
-
-
+homeButton.addEventListener("click", reload, false);
+    
 
 
 
