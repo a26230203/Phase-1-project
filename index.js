@@ -102,7 +102,7 @@ function getFood(food) {
         foodReviewForm.append(submitReviewBtn)
 
         foodReviewUl.innerText = ""
-        food.review.forEach(reviewArr => {
+        food.review.forEach((reviewArr, index) => {
             let foodReviewUls = document.createElement('ul')
             foodReviewUls.className = "foodReviewUls"
             let newPs = document.createElement('p')
@@ -152,12 +152,9 @@ function getFood(food) {
             if(foodReviewShows) {
                 editForms.append(editInputs, editorSubs)
                 foodReviewUls.append(editForms)
-
-
                 editForms.addEventListener("submit", e => {
                     e.preventDefault()
                     let newInput = e.target.input.value
-                    let arrOfFoodReview = [...food.review, newInput]
                     fetch(`http://localhost:3000/foods/${food.id}`, {
                         method: "PATCH",
                         headers: {
@@ -224,43 +221,6 @@ function getFood(food) {
                     
                     foodReviewUls.append(newPs, editors, delBtns) 
                     foodUl.append(foodReviewUls)
-                    
-           /*editors.addEventListener('click', e => {
-                foodReviewShows = !foodReviewShows
-                if(foodReviewShows) {
-                        editForms.append(editInputs, editorSubs)
-                        foodReviewUls.append(editForms)
-
-                    editForms.addEventListener("submit", e => {
-                        e.preventDefault
-                        let newInput = e.target.input.value
-                        let arrOfFoodReview = [...food.review, newInput]
-                        fetch(`http://localhost:3000/foods/${food.id}`, {
-                            method: "PATCH",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                review: arrOfFoodReview
-                            }),
-                        })
-                        .then(res => res.json())
-                        .then(updatedReview => {
-                            newP.innerText = updatedReview.review
-                        })
-                    })
-
-                   // delBtns.addEventListener('click', )
-                    
-                            editInputs.style.display = 'block'
-                            editorSubs.style.display = 'block'
-                            
-                        }else {
-
-                            editInputs.style.display = 'none'
-                            editorSubs.style.display = 'none'
-                        }
-                    })*/
                 })
             })
 

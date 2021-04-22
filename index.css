@@ -1,0 +1,24 @@
+.logo {
+    color: crimson;
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.logo span {
+    color: black;
+}
+
+.navBar {
+    display: flex;
+    list-style: none;
+}
+
+.navBar li {
+    display: inline-block;
+    font-weight: 500;
+    padding: 0px 5px;
+    margin-left: 200px;
+    text-transform: uppercase;
+    color: black;
+    font-size: 20px;
+}
