@@ -17,6 +17,9 @@ let contactInfoDiv = document.querySelector('section.contactInfo')
 let reviewHeaderSec = document.querySelector('section.reviewHeader')
 let contactUl = document.createElement('ul')
     contactUl.className = "contactUl"
+let reviewH = document.createElement('h1')
+    
+        
 
 restaurantReview.style.display = "none"
 customerReview.style.display = "none"
@@ -27,9 +30,7 @@ homeMenus.addEventListener('click', e => {
     if(homeMenusShows && homeMenusCounter == 0){
         homeMenusCounter++
 
-        let reviewH = document.createElement('h1')
-            reviewH.innerText = "Customer Reviews"
-
+        reviewH.innerText = "Customer Reviews"
         reviewHeaderSec.append(reviewH)
         
     fetch('http://localhost:3000/Foods')
@@ -472,6 +473,7 @@ function getFood(food) {
                 menu.style.display = "block"
                 customerReview.style.display = "block"
                 restaurantReview.style.display = "block"
+                reviewHeaderSec.style.display = 'block'
  
     }else {
                 menu.style.display = "none"
@@ -480,6 +482,8 @@ function getFood(food) {
                 homeMenusCounter--
                 menu.innerText = ""
                 customerReview.innerText = ""
+                reviewH.innerText = ""
+                reviewHeaderSec.style.display = 'none'
     }
 })
 
