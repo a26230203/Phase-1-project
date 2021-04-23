@@ -14,6 +14,9 @@ let contactCounter = 0;
 let homeMenusCounter = 0;
 let contactHeader = document.querySelector('li#contact')
 let contactInfoDiv = document.querySelector('section.contactInfo')
+let reviewHeaderSec = document.querySelector('section.reviewHeader')
+let contactUl = document.createElement('ul')
+    contactUl.className = "contactUl"
 
 restaurantReview.style.display = "none"
 customerReview.style.display = "none"
@@ -21,10 +24,14 @@ customerReview.style.display = "none"
 
 homeMenus.addEventListener('click', e => {
     homeMenusShows = !homeMenusShows
-    
     if(homeMenusShows && homeMenusCounter == 0){
         homeMenusCounter++
-    
+
+        let reviewH = document.createElement('h1')
+            reviewH.innerText = "Customer Reviews"
+
+        reviewHeaderSec.append(reviewH)
+        
     fetch('http://localhost:3000/Foods')
     .then(res => res.json())
     .then(menuArr => {
@@ -75,8 +82,11 @@ function getFood(food) {
         likeBtn.className = "likeBtn"
         likeBtn.innerText = "Like"
 
+        let line = document.createElement('hr')
+        line.className = 'divider'
+
             
-        foodUl.append(descr, price, likeBtn, likes, foodReviewBtn)
+        foodUl.append(descr, price, line, likeBtn, likes, foodReviewBtn)
 
         foodLi.append(foodUl)
         
@@ -84,9 +94,10 @@ function getFood(food) {
         foodReviewForm.className = "foodReviewForm"       
 
         let formInput = document.createElement('input')
+        formInput.className = 'formInput'
         formInput.type = 'text'
         formInput.name = 'foodReview'
-        formInput.placeholder = 'Type your review here'
+        formInput.placeholder = 'Let us know what you thought of this item!'
 
         let submitReviewBtn = document.createElement('input')
         submitReviewBtn.type = "submit"
@@ -111,7 +122,7 @@ function getFood(food) {
             foodReviewUls.className = "foodReviewUls"
             let newPs = document.createElement('p')
                 newPs.className = "reviewP"
-                newPs.innerText = reviewArr
+                newPs.innerText = `"${reviewArr}"`
     
           /*  let delBtns = document.createElement('button')
                 delBtns.className = "delete"
@@ -134,6 +145,7 @@ function getFood(food) {
                 foodReviewUl.append(foodReviewUls)
                 foodUl.append(foodReviewUl)
 
+            //We don't want any user to be able to edit or delete any review
       /*  delBtns.addEventListener('click', e =>{
             food.review.splice(index, 1)
             fetch(`http://localhost:3000/foods/${food.id}`, {
@@ -342,15 +354,17 @@ function getFood(food) {
                 }  
             })
         }
-    
+        
+        
     fetch('http://localhost:3000/reviews')
     .then(res => res.json())
     .then(reviewObj => {
         reviewObj.forEach(review => {
            // overallReview(review)
+           
            let newP = document.createElement('p')
         newP.className = "reviewP"
-        newP.innerText = review.review
+        newP.innerText = `"${review.review}"`
         let reviewList = document.createElement('ul')
         reviewList.append(newP)
         customerReview.append(reviewList)
@@ -381,7 +395,7 @@ function getFood(food) {
     function overallReview(review) {
         let newP = document.createElement('p')
         newP.className = "reviewP"
-        newP.innerText = review.review
+        newP.innerText = `"${review.review}"`
     
         let delBtn = document.createElement('button')
         delBtn.className = "delete"
@@ -470,8 +484,7 @@ function getFood(food) {
 })
 
 
-let contactUl = document.createElement('ul')
-contactUl.className = "contactUl"
+
 
 contactHeader.addEventListener('click', e => {  
     contactShows = !contactShows

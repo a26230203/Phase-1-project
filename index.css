@@ -107,7 +107,13 @@ ul.contactUl {
     background-color: rgba(12, 12, 12, 0.5);
     margin-left: 30%;
     margin-right: 30%;
-    
+    margin-top: 65px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+section.contactInfo {
+    padding-bottom: 35px;
 }
 
 section.menu {
@@ -123,8 +129,7 @@ ul.foodList {
     background-color: rgba(12, 12, 12, 0.5);
     margin-left: 25%;
     margin-right: 25%;
-    
-
+    padding-top: 30px;
 }
 
 ul {
@@ -179,11 +184,15 @@ section.customerreview {
     padding-bottom: 10px;
     margin-left: 15%;
     margin-right: 15%;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 form.restaurant-review {
     display: block;
     text-align: center;
+    padding-bottom: 25px;
 }
 
 input#restaurantReview {
@@ -191,4 +200,32 @@ input#restaurantReview {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    width: 50%;
+}
+
+input.formInput {
+    width: 60%;
+}
+
+hr.divider {
+    border-top: 3px solid #b1150a;
+}
+
+hr.bottom-divider {
+    border-top: 3px solid #b1150a;
+    margin-top: 100px;
+}
+
+section.reviewHeader {
+    margin-top: 50px;
+    font-family: fantasy;
+    font-size: xxx-large;
+    background: rgba(12, 12, 12, 0.5);
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+section.reviewHeader h1 {
+    padding-top: 15px;
 }
